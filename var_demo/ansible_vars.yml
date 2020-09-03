@@ -1,0 +1,13 @@
+---
+
+- hosts: webservers
+  become: yes
+  remote_user: ansible
+  gather_facts: yes
+  vars_files:
+    /home/ansible/ansible-demo/ansible-demo/var_demo/web_vars.ini
+  tasks:
+    - name: ensure service is running 
+      service:
+        name: "{{ service_target }}"
+        state: "{{ service_state }}"
