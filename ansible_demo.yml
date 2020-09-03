@@ -1,0 +1,24 @@
+---
+
+- hosts: webservers
+  become: yes
+  remote_user: ansible
+  gather_facts: yes
+  tasks:
+    - name: ensure package is instlled
+      package:
+        name: httpd
+        state: latest
+    
+    - name: ensure service is running 
+      service:
+        name: httpd
+        state: started
+
+    - name: run command 
+      command: cat /etc/motd
+      register: mymotd
+    - name: print result
+      debug:
+              var: mymotd 
+    
